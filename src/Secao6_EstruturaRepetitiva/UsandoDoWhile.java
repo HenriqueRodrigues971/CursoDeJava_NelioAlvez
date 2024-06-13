@@ -14,5 +14,6 @@ public class UsandoDoWhile {
 		System.out.println("deseja repetir? (s/n)");
 		resp = scan.next().charAt(0);
 	}while(resp != 'n');
+	scan.close();
 }
 }
