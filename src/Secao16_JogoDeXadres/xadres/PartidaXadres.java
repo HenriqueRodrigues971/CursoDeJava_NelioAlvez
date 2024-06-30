@@ -1,5 +1,6 @@
 package Secao16_JogoDeXadres.xadres;
 
+import Secao16_JogoDeXadres.boardgame.Peca;
 import Secao16_JogoDeXadres.boardgame.Position;
 import Secao16_JogoDeXadres.boardgame.Tabuleiro;
 import Secao16_JogoDeXadres.xadres.pecas.Rei;
@@ -23,9 +24,45 @@ public class PartidaXadres {
 		return mat;
 	}
 
+	public PecaXadres performaXadresMovimento(XadresPosicao posicaoOrigem, XadresPosicao posicaoDestino) {
+		Position origem = posicaoOrigem.toPosition();
+		Position destino = posicaoDestino.toPosition();
+		validarPosicaoDeOrigem(origem);
+		Peca pecaCapturada = movimentarPeca(origem, destino);
+		return (PecaXadres) pecaCapturada;
+	}
+	
+	private Peca movimentarPeca(Position origem, Position destino) {
+		Peca p = tabuleiro.removerPeca(origem);
+		Peca pecaCapturada = tabuleiro.removerPeca(destino);
+		tabuleiro.posicionarPeca(p, destino);
+		return pecaCapturada;
+	}
+
+	private void validarPosicaoDeOrigem(Position position) {
+		if (!tabuleiro.temUmaPeca(position)) {
+			throw new XadrezException("Não existe peça na posição de origem.");
+		}
+	}
+
+	private void novaPosicaoPeca(char coluna, int linha, PecaXadres peca) {
+		tabuleiro.posicionarPeca(peca, new XadresPosicao(coluna, linha).toPosition());
+	}
+
 	private void iniciarSetup() {
-		tabuleiro.posicionarPeca(new Torre(tabuleiro, Color.WHITE), new Position(2, 1));
-		tabuleiro.posicionarPeca(new Rei(tabuleiro, Color.BLACK), new Position(0, 4));
-		tabuleiro.posicionarPeca(new Rei(tabuleiro, Color.WHITE), new Position(7, 4));
+		novaPosicaoPeca('c', 2, new Torre(tabuleiro, Color.WHITE));
+		novaPosicaoPeca('c', 1, new Torre(tabuleiro, Color.WHITE));
+		novaPosicaoPeca('d', 2, new Torre(tabuleiro, Color.WHITE));
+		novaPosicaoPeca('e', 2, new Torre(tabuleiro, Color.WHITE));
+		novaPosicaoPeca('e', 1, new Torre(tabuleiro, Color.WHITE));
+		novaPosicaoPeca('d', 1, new Rei(tabuleiro, Color.WHITE));
+
+		novaPosicaoPeca('c', 7, new Torre(tabuleiro, Color.BLACK));
+		novaPosicaoPeca('c', 8, new Torre(tabuleiro, Color.BLACK));
+		novaPosicaoPeca('d', 7, new Torre(tabuleiro, Color.BLACK));
+		novaPosicaoPeca('e', 7, new Torre(tabuleiro, Color.BLACK));
+		novaPosicaoPeca('e', 8, new Torre(tabuleiro, Color.BLACK));
+		novaPosicaoPeca('d', 8, new Rei(tabuleiro, Color.BLACK));
+
 	}
 }
