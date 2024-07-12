@@ -3,7 +3,7 @@ package Secao16_JogoDeXadres.xadres;
 import Secao16_JogoDeXadres.boardgame.Peca;
 import Secao16_JogoDeXadres.boardgame.Tabuleiro;
 
-public class PecaXadres extends Peca {
+public abstract class PecaXadres extends Peca {
 
 	private Color color;
 
