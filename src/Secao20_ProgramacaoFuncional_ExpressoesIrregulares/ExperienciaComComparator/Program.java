@@ -1,4 +1,4 @@
-package Secao20_ProgramacaoFUcnional_ExpressoesIrregulares.ExperienciaComComparator;
+package Secao20_ProgramacaoFuncional_ExpressoesIrregulares.ExperienciaComComparator;
 
 import java.util.ArrayList;
 import java.util.Comparator;
